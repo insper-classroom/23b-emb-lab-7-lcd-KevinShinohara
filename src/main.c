@@ -309,7 +309,7 @@ void configure_lvgl(void) {
 	disp_drv.hor_res = LV_HOR_RES_MAX;      /*Set the horizontal resolution in pixels*/
 	disp_drv.ver_res = LV_VER_RES_MAX;      /*Set the vertical resolution in pixels*/
 
-	lv_disp_t * disp;
+	
 	lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
 	
 	/* Init input on LVGL */
