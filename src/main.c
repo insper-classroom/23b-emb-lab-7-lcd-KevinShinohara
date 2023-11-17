@@ -217,7 +217,7 @@ void lv_termostato(void) {
     lv_obj_align(labelClock, LV_ALIGN_RIGHT_MID, -10, -100);
     lv_obj_set_style_text_font(labelClock, &dseg30, LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(labelClock, lv_color_white(), LV_STATE_DEFAULT);
-	uint32_t init_hour, init_min, init_sec;
+	uint32_t init_hour, init_min;
 	
     lv_label_set_text_fmt(labelClock, "%02d:%02d", init_hour, init_min);
 }
@@ -310,13 +310,13 @@ void configure_lvgl(void) {
 	disp_drv.ver_res = LV_VER_RES_MAX;      /*Set the vertical resolution in pixels*/
 
 	lv_disp_t * disp;
-	disp = lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
+	lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
 	
 	/* Init input on LVGL */
 	lv_indev_drv_init(&indev_drv);
 	indev_drv.type = LV_INDEV_TYPE_POINTER;
 	indev_drv.read_cb = my_input_read;
-	lv_indev_t * my_indev = lv_indev_drv_register(&indev_drv);
+	lv_indev_drv_register(&indev_drv);
 }
 
 /************************************************************************/
