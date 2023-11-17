@@ -11,15 +11,6 @@
 /************************************************************************/
 /* Constants                                                           */
 /************************************************************************/
-typedef struct  {
-  uint32_t year;
-  uint32_t month;
-  uint32_t day;
-  uint32_t week;
-  uint32_t hour;
-  uint32_t minute;
-  uint32_t second;
-} calendar;
 
 volatile static lv_obj_t * btnPower;
 volatile static lv_obj_t * btnMenu;
@@ -99,30 +90,7 @@ static void power_handler(lv_event_t * e) {
 	lv_event_code_t code = lv_event_get_code(e);
 
 	if (code == LV_EVENT_CLICKED) {
-		flag_on = !flag_on;
-		if (flag_on) {
-    		lv_label_set_text(labelBtnPower, "[  " LV_SYMBOL_POWER "  ");
-			lv_obj_set_width(btnMenu, 60);  lv_obj_set_height(btnMenu, 60);
-			lv_obj_set_width(btnClk, 60);  lv_obj_set_height(btnClk, 60);
-			lv_obj_set_width(btnDown, 60);  lv_obj_set_height(btnDown, 60);
-			lv_obj_set_width(btnUp, 60);  lv_obj_set_height(btnUp, 60);
-			lv_label_set_text_fmt(labelFloor, "%02d", 23);
-			lv_label_set_text_fmt(labelFloorDecimal, ".%d", 4);
-			lv_label_set_text_fmt(labelSetValue, "%02d", 22);
-			uint32_t init_hour, init_min, init_sec;
-
-			lv_label_set_text_fmt(labelClock, "%02d:%02d", init_hour, init_min);
-		} else {
-			lv_label_set_text(labelBtnPower, "[  " LV_SYMBOL_POWER "  ]");
-			lv_obj_set_width(btnMenu, 0);  lv_obj_set_height(btnMenu, 0);
-			lv_obj_set_width(btnClk, 0);  lv_obj_set_height(btnClk, 0);
-			lv_obj_set_width(btnDown, 0);  lv_obj_set_height(btnDown, 0);
-			lv_obj_set_width(btnUp, 0);  lv_obj_set_height(btnUp, 0);
-    		lv_label_set_text_fmt(labelFloor, "");
-			lv_label_set_text_fmt(labelFloorDecimal, "");
-			lv_label_set_text_fmt(labelSetValue, "");
-			lv_label_set_text_fmt(labelClock, "");
-		}
+		LV_LOG_USER("Clicked");
 	}
 	else if(code == LV_EVENT_VALUE_CHANGED) {
 		LV_LOG_USER("Toggled");
@@ -180,7 +148,7 @@ void lv_termostato(void) {
     lv_style_init(&style);
     lv_style_set_bg_color(&style, lv_color_black());
     lv_style_set_border_color(&style, lv_color_white());
-    // lv_style_set_border_width(&style, 5);
+    
 
 	btnPower = lv_btn_create(lv_scr_act());
 	lv_obj_add_event_cb(btnPower, power_handler, LV_EVENT_ALL, NULL);
@@ -259,7 +227,6 @@ void lv_termostato(void) {
 /************************************************************************/
 
 static void task_lcd(void *pvParameters) {
-	int px, py;
 
 	lv_termostato();
 
@@ -321,7 +288,7 @@ void my_flush_cb(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * 
 }
 
 void my_input_read(lv_indev_drv_t * drv, lv_indev_data_t*data) {
-	int px, py, pressed;
+	int px, py;
 	
 	if (readPoint(&px, &py))
 		data->state = LV_INDEV_STATE_PRESSED;
