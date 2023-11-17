@@ -20,28 +20,32 @@ typedef struct  {
   uint32_t minute;
   uint32_t second;
 } calendar;
+
 volatile static lv_obj_t * btnPower;
 volatile static lv_obj_t * btnMenu;
-volatile static lv_obj_t * btnClk;
+
 volatile static lv_obj_t * btnUp;
 volatile static lv_obj_t * btnDown;
 volatile static lv_obj_t * labelBtnPower;
 volatile static lv_obj_t * labelBtnMenu;
-volatile static lv_obj_t * labelBtnClk;
+
 volatile static lv_obj_t * labelBtnUp;
 volatile static lv_obj_t * labelBtnDown;
 volatile static lv_obj_t * labelFloor;
 volatile static lv_obj_t * labelFloorDecimal;
 volatile static lv_obj_t * labelSetValue;
+
 volatile static lv_obj_t * labelClock;
+volatile static lv_obj_t * labelBtnClk;
+volatile static lv_obj_t * btnClk;
+
 volatile int    flag_pisca = 0;
 volatile int    flag_on = 1;
+
 /************************************************************************/
 /* LCD / LVGL                                                           */
 /************************************************************************/
-LV_FONT_DECLARE(dseg30);
-LV_FONT_DECLARE(dseg50);
-LV_FONT_DECLARE(dseg70);
+
 
 #define LV_HOR_RES_MAX          (320)
 #define LV_VER_RES_MAX          (240)
@@ -51,8 +55,12 @@ static lv_disp_draw_buf_t disp_buf;
 
 /*Static or global buffer(s). The second buffer is optional*/
 static lv_color_t buf_1[LV_HOR_RES_MAX * LV_VER_RES_MAX];
-static lv_disp_drv_t disp_drv;          /*A variable to hold the drivers. Must be static or global.*/
+static lv_disp_drv_t disp_drv;         
 static lv_indev_drv_t indev_drv;
+
+LV_FONT_DECLARE(dseg30);
+LV_FONT_DECLARE(dseg50);
+LV_FONT_DECLARE(dseg70);
 
 /************************************************************************/
 /* RTOS                                                                 */
