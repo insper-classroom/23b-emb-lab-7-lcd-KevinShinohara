@@ -31,7 +31,7 @@ volatile static lv_obj_t * labelBtnClk;
 volatile static lv_obj_t * btnClk;
 
 volatile int    flag_pisca = 0;
-volatile int    flag_on = 1;
+
 
 /************************************************************************/
 /* LCD / LVGL                                                           */
